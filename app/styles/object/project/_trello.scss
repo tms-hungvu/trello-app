@@ -1,0 +1,129 @@
+.red {
+    background: red;
+}
+.app__todo--content::-webkit-scrollbar {
+    display: none;
+}
+.app__todo {
+    border-radius: 4px;
+    background: black;
+}
+.app__todo--content {
+    position: relative;
+    padding : 10px ;
+    overflow-y: auto;
+    height: 400px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    display: flex;
+    gap : 15px;
+    flex-direction: column;
+    &-item {
+
+        &-icon {
+            display: none;
+        }
+        @extend .flex-align-center-between;
+        &:hover {
+            .app__todo--content-item-icon {
+                cursor: pointer;
+                display: block;
+            }
+
+            border : 2px solid red;
+        }
+        padding : 10px 10px;
+        border-radius: 3px;
+        box-shadow: 1px 2px 3px 4px rgba(0, 0, 0, 0.63);
+        background: white;
+    }
+    &-form {
+        padding : 10px;
+        &-btn {
+            cursor: pointer;
+            color : white;
+            padding : 7px;
+            border-radius: 4px;
+            &:hover {
+                background: red;
+                color : white;
+            }
+            @extend .flex-content-start;
+            gap : 10px;
+        }
+    }
+    
+}
+.app__todo--title {
+    font-size: 20px;
+    color : white;
+    padding : 10px 20px 0px 20px;
+}
+.app__popup--container {
+  
+    position: absolute;
+    top : 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: white;
+    
+   border-radius: 4px;
+    padding: 20px;
+    span {
+        color : red;
+    }
+}
+.app__popup--content {
+    margin-top: 10px;
+    &-form-item {
+      width: 100%;
+    }
+    &-form {
+        display: flex;
+        flex-direction: column;
+        gap : 10px;
+    }
+}
+.app__todo--content-form-add {
+    span {
+        color : red;
+    }
+    color : white;
+    &-btn {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap : 10px;
+    }
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.app__todo--content-form-btns {
+    background: white;
+    border-radius: 6px;
+    padding : 10px;
+}
+.app__popup--content-form-item {
+    input[type="date"] {
+        border : 1px solid #adabab;
+        border-radius: 4px;
+        outline: none;
+        padding : 10px;
+    }
+    textarea {
+        border : 1px solid #adabab;
+        border-radius: 4px;
+        outline: none;
+        padding : 10px;
+    }
+    display: flex;
+    flex-direction: column;
+}
+.app__popup--content-form-item-delete {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+}

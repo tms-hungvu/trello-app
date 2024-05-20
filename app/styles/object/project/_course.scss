@@ -1,0 +1,111 @@
+.app__course--banner {
+    @extend .height-100;
+    flex-direction: column;
+    gap : 30px;
+    padding : 0px 30px;
+    @extend .flex-align-center;
+
+    h1 {
+        line-height: 54px;
+        font-size: 48px;
+        font-weight: 700;
+        color : #141414;
+    }
+    p {
+        font-size: 16px;
+        line-height: 25px;
+        color : #4F4F4F;
+    }
+    button {
+        font-size: 20px;
+        font-weight: 600;
+        padding : 15px 30px;
+        text-transform: none;
+        
+    }
+}
+
+.app__course--banner-image {
+    @extend .height-100;
+    img {
+        border-radius: 0px;
+        width: 100% !important;
+    }
+}
+.app_carousel--brand {
+    gap : 20px;
+    flex-direction: column;
+    @extend .flex-align-center;
+    &-title {
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #141414;
+        }
+    }
+    &-content {
+        width : 100%;
+    }
+}
+
+.app_blog--title {
+    margin-top: 50px;
+    
+    gap : 30px;
+    flex-direction: column;
+    @extend .flex-align-center;
+
+    &-text {
+         h1 {
+            font-size: 72px;
+            font-weight: 700;
+         }
+    }
+    &-button {
+        @extend .flex-align-center;
+        gap : 20px;
+    }
+}
+
+.app__blog--content-item {
+    margin : 15px 0px;
+    border-radius: 20px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .08), 0 1px 4px rgba(0, 0, 0, .12);
+    flex-direction: column;
+    @extend .flex-align-center;
+    &-icon {
+        background : #C6E3FF;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding : 30px 0px;
+        @extend .width-100;
+        @extend .flex-align-center;
+        &-box {
+             box-shadow: 0 0 1px rgba(0, 0, 0, .08), 0 1px 4px rgba(0, 0, 0, .12);
+            background : white;
+            padding : 20px 20px;
+            border-radius : 20px;
+            img {
+                border-radius: 0px !important;
+                 width : 126px;
+                 height :126px;
+            }
+        }
+    }
+    &-description {
+        padding : 40px 30px;
+        gap : 10px;
+        flex-direction: column;
+        @extend .flex-align-start;
+        h1 {
+            font-size : 24px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 16px;
+            line-height: 22.4px;
+           
+        }
+    }
+
+}

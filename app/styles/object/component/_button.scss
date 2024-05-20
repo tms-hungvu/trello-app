@@ -1,0 +1,62 @@
+.c-btn {
+    text-transform: none;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .08), 0 1px 4px rgba(0, 0, 0, .12);
+    cursor: pointer;
+    border: none;
+    border-radius: 9px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  // Primary btn style
+  .c-primary-btn {
+    @extend .c-btn;
+    background-color: #007bff;
+    color: #fff;
+    &:hover {
+      background: #0165cf;
+     
+    }
+  }
+  .c-white-btn {
+    
+    @extend .c-btn;
+    background-color: #ffffff;
+    color: #3C3F43;
+    &:hover {
+      background: #eee;
+      color : black;
+    }
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.12) !important;
+  }
+  
+  
+  // Secondary btn style
+  .c-secondary-btn {
+    @extend .c-btn;
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  // Success btn style
+  .c-success-btn {
+    @extend .c-btn;
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  // Error btn style
+  .c-error-btn {
+    @extend .c-btn;
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  // btn hover styles
+  .c-btn:hover {
+    opacity: 0.9;
+  }

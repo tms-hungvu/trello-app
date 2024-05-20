@@ -1,0 +1,50 @@
+.app__footer {
+    &-last-block {
+        margin : 40px 0px !important;
+    }
+    .app__footer--list {
+        font-size: 14px;
+        li {
+            &:first-child {
+                a {
+                    font-weight: 600;
+                    color : black !important;
+                }
+            }
+            white-space: nowrap;
+        }
+         a {
+            text-decoration: none;
+            color : $list-a-color;
+            &:hover {
+                
+                color : black;
+            }
+         }
+
+         &-socialite-item {
+           
+            @extend .flex-content-start;
+       
+            gap : 8px;
+         }
+    }
+    &--copyright {
+        @extend .flex-content-bottom ;
+               font-size: 14px;
+            font-weight: 600;
+            
+            height: 100%;
+            
+    }
+    &--image {
+        width: 64px;
+        height: 100%;
+        border-radius: 0px !important;
+    }
+    &--image-content {
+        height: 100%;
+        
+       @extend .flex-align-end;
+    }
+}

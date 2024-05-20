@@ -1,0 +1,40 @@
+// _base.scss
+
+// Typography
+
+
+body {
+  font-family: $body-font-family;
+  font-size: 16px; // Default font size
+  line-height: 1.6; // Default line height
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading-font-family;
+  font-weight: bold;
+  // Additional styles for headings
+}
+
+
+
+// Example of spacing utility classes
+.margin-top {
+  margin-top: $spacing-unit;
+}
+
+.margin-bottom {
+  margin-bottom: $spacing-unit;
+}
+
+.padding-left {
+  padding-left: $spacing-unit;
+}
+
+.padding-right {
+  padding-right: $spacing-unit;
+}
+
+// Container styles
+
+
+// Additional base styles can be added below

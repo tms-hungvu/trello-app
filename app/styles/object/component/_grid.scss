@@ -1,0 +1,176 @@
+
+
+
+
+
+
+
+$sm-screen: 600px;
+$md-screen: 768px;
+$lg-screen: 992px;
+$xl-screen: 1200px;
+
+
+
+*, ::after, ::before {
+    box-sizing: border-box;
+    padding : 0px;
+    margin : 0px;
+}
+
+.container {
+    padding-right: calc(1.5rem * .5);
+    padding-left: calc(1.5rem * .5);
+    margin-right: auto;
+    margin-left: auto;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * 0);
+    margin-right: calc(-.5 * 1.5rem);
+    margin-left: calc(-.5 *1.5rem);
+}
+
+.container-fluid {
+    width : 100%;
+    display : flex;
+    align-items: center;
+    justify-content: center;
+}
+.col {
+    flex: 1 0 0%;
+}
+[class*="col-"] {
+    flex: 0 0 auto;
+}
+
+
+@media only screen and (max-width: 600px) {
+   
+   
+    .row>* {
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 100%;
+        padding-right: calc(1.5rem * .5);
+        padding-left: calc(1.5rem * .5);
+        margin-top: 0;
+    }
+    .container {
+        width : 100%;
+    }
+    .col-1 {width: 8.33% !important;}
+    .col-2 {width: 16.66% !important;}
+    .col-3 {width: 25% !important;}
+    .col-4 {width: 33.33% !important;}
+    .col-5 {width: 41.66% !important;}
+    .col-6 {width: 50% !important;}
+    .col-7 {width: 58.33% !important;}
+    .col-8 {width: 66.66% !important;}
+    .col-9 {width: 75% !important;}
+    .col-10 {width: 83.33% !important;}
+    .col-11 {width: 91.66% !important;}
+    .col-12 {width: 100% !important;}
+   
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: $sm-screen) {
+  
+    .row>* {
+        max-width: 100%;
+        padding-right: calc(1.5rem * .5);
+        padding-left: calc(1.5rem * .5);
+        margin-top: 0;
+    }
+    .container {
+        width: 570px;
+        
+    }
+    .col-sm-1 {width: 8.33%;}
+    .col-sm-2 {width: 16.66%;}
+    .col-sm-3 {width: 25%;}
+    .col-sm-4 {width: 33.33%;}
+    .col-sm-5 {width: 41.66%;}
+    .col-sm-6 {width: 50%;}
+    .col-sm-7 {width: 58.33%;}
+    .col-sm-8 {width: 66.66%;}
+    .col-sm-9 {width: 75%;}
+    .col-sm-10 {width: 83.33%;}
+    .col-sm-11 {width: 91.66%;}
+    .col-sm-12 {width: 100%;}
+    
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: $md-screen) {
+    .container {
+        width : 740px;
+        
+    }
+   
+  
+    
+  .col-md-1 {width: 8.33%;}
+  .col-md-2 {width: 16.66%;}
+  .col-md-3 {width: 25%;}
+  .col-md-4 {width: 33.33%;}
+  .col-md-5 {width: 41.66%;}
+  .col-md-6 {width: 50%;}
+  .col-md-7 {width: 58.33%;}
+  .col-md-8 {width: 66.66%;}
+  .col-md-9 {width: 75%;}
+  .col-md-10 {width: 83.33%;}
+  .col-md-11 {width: 91.66%;}
+  .col-md-12 {width: 100%;}
+ 
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: $lg-screen) {
+    .container {
+        width : 100%;
+       
+    }
+    
+   
+    .col-lg-1 {width: 8.33%;}
+    .col-lg-2 {width: 16.66%;}
+    .col-lg-3 {width: 25%;}
+    .col-lg-4 {width: 33.33%;}
+    .col-lg-5 {width: 41.66%;}
+    .col-lg-6 {width: 50%;}
+    .col-lg-7 {width: 58.33%;}
+    .col-lg-8 {width: 66.66%;}
+    .col-lg-9 {width: 75%;}
+    .col-lg-10 {width: 83.33%;}
+    .col-lg-11 {width: 91.66%;}
+    .col-lg-12 {width: 100%;}
+   
+}
+ 
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: $xl-screen) {
+    .container {
+         max-width : 1281px; 
+       
+        
+    }
+    
+ 
+    
+    .col-xl-1 {width: 8.33%;}
+    .col-xl-2 {width: 16.66%;}
+    .col-xl-3 {width: 25%;}
+    .col-xl-4 {width: 33.33%;}
+    .col-xl-5 {width: 41.66%;}
+    .col-xl-6 {width: 50%;}
+    .col-xl-7 {width: 58.33%;}
+    .col-xl-8 {width: 66.66%;}
+    .col-xl-9 {width: 75%;}
+    .col-xl-10 {width: 83.33%;}
+    .col-xl-11 {width: 91.66%;}
+    .col-xl-12 {width: 100%;}
+
+}

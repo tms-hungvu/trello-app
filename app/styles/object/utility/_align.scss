@@ -1,0 +1,72 @@
+.flex-align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .flex-align-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .flex-align-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+  
+  // Flexbox utility classes for aligning items vertically
+  
+  
+  .flex-align-top {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .flex-align-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+
+
+
+  .flex-content-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .flex-content-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .flex-content-bottom {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+
+
+  .flex-content-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+
+  .flex-align-center-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  
+
+
+  
