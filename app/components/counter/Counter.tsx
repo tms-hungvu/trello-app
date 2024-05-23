@@ -19,6 +19,7 @@ import { TrelloSliceState , addTodo, updateTodo, deleteTodo, setTodo, setTypeTod
 import update from 'immutability-helper'
 import { Card } from '../Card/Card';
 import { store } from '@/lib/store';
+import { useDrop } from 'react-dnd';
 
 
 const schemUpdate = Joi.object({
@@ -235,6 +236,39 @@ export const Counter = () => {
   )
 
 
+  const DroppableArea: React.FC<any> = ({ onDrop }) => {
+    const [{ isOver }, drop] = useDrop({
+      accept:  'card',
+      drop: (item) => onDrop(item),
+      collect: (monitor) => ({
+        isOver: !!monitor.isOver(),
+      }),
+    });
+  
+    return (
+      <div ref={drop} style={{ backgroundColor: isOver ? 'rgba(255, 255, 255, 0.226)' : 'black' , height : '45px'}}>
+           
+      </div>
+    );
+  };
+
+
+  const handleDrop = (type : number, item: any) => {
+   // console.log('Item dropped:',type, item);
+    dispatch(setTypeTodo({id : Number(item.id), type : type} as TrelloSliceState))
+  };
+
+ const getTotalTypeTrello = (list : TrelloSliceState[], type : number) => {
+    let temp = 0;
+    list.map((item) => {
+       if(item.type == type){
+        temp ++;
+       }
+    })
+    return temp;
+ }
+
+
   return (
     
 
@@ -327,7 +361,9 @@ export const Counter = () => {
                   <h1> Todo</h1>
                 </div>
                 <div className="app__todo--content">
+                 { getTotalTypeTrello(tasks, 1) == 0 &&  <DroppableArea onDrop={(item : { id : number, index : number}) => handleDrop(1, item)} />}
                   
+               
                 {tasks.map((card, i) => {
                    return renderCard(card, i, 1)
                 })}
@@ -417,7 +453,8 @@ export const Counter = () => {
                   <h1> Doing</h1>
                 </div>
                 <div className="app__todo--content">
-
+                { getTotalTypeTrello(tasks, 2) == 0 &&  <DroppableArea onDrop={(item : { id : number, index : number}) => handleDrop(2, item)} />}
+                
                 {tasks.map((card, i) => {
                      return renderCard(card, i, 2)
                 })}
@@ -500,6 +537,9 @@ export const Counter = () => {
                   <h1> Done</h1>
                 </div>
                 <div className="app__todo--content">
+               
+                { getTotalTypeTrello(tasks, 3) == 0 &&  <DroppableArea onDrop={(item : { id : number, index : number}) => handleDrop(3, item)} />}
+
                 {tasks.map((card, i) => {
                      return renderCard(card, i, 3)
                 })}

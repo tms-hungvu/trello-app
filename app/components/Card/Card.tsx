@@ -48,15 +48,17 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
     },
     hover(item: DragItem, monitor) {
 
-      console.log('trigger trigger ...')
-
+     
+      //console.log('trigger trigger ...')
 
       if (!ref.current) {
         return
       }
 
+
      
-      const dragColumnIndex = Number(item.id) ////
+     
+      const dragColumnIndex = Number(item.id) 
       const dragIndex = item.index
 
 
@@ -96,7 +98,7 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
       moveCard(dragIndex, hoverIndex, dragColumnIndex, hoverColumnIndex)
 
       item.index = hoverIndex
-      
+     
     },
   })
 
@@ -111,12 +113,13 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
   })
 
   const opacity = isDragging ? 0 : 1
+
   drag(drop(ref))
 
 
  return (
     <>
-      {type == columnIndex ? (
+      {type == columnIndex && (
         <div
           ref={ref}
           style={{ ...style, opacity }}
@@ -132,8 +135,7 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
             </Tooltip>
           </div>
         </div>
-      ) : (""
-      )}
+      ) }
     </>
   );
 }
