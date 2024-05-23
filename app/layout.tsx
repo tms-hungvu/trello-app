@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 import { StoreProvider } from "./StoreProvider";
+import { DndProvider } from 'react-dnd'
+	import { HTML5Backend } from 'react-dnd-html5-backend'
 
 
 // import "./styles/globals.css";
@@ -31,7 +33,11 @@ export default function RootLayout({ children }: Props) {
         />
         </head>
         <body>
-         {children}
+
+        <DndProvider backend={HTML5Backend}>
+				{children}
+				</DndProvider>
+         
         </body>
       </html>
     </StoreProvider>

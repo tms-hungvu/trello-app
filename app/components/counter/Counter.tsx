@@ -12,11 +12,11 @@ import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, D
 import { alpha, styled } from "@mui/material/styles";
 import { pink } from "@mui/material/colors";
 import Switch from "@mui/material/Switch";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { useForm } from 'react-hook-form';
 import { TrelloSliceState , addTodo, updateTodo, deleteTodo} from '@/lib/features/trelloAPI';
-
+import update from 'immutability-helper'
 
 
 const schemUpdate = Joi.object({
@@ -83,7 +83,7 @@ export const Counter = () => {
     }
     dispatch(addTodo(payload));
     reset();
-    //console.log(payload)
+    console.log(payload)
   }
 
 
@@ -115,6 +115,7 @@ export const Counter = () => {
   });
 
   const onSubmitUpdate = (data : any) => {
+    alert('update')
     const newDate = data.date;
     delete data.date;
 
@@ -124,6 +125,7 @@ export const Counter = () => {
       date : String(newDate)
       
     }
+  
     dispatch(updateTodo(payload))
     handleClose();
  
@@ -164,6 +166,52 @@ export const Counter = () => {
     setOpenConfirm(false);
     handleClose();
   };
+
+
+  const [cards, setCards] = useState([
+    {
+      id: 1,
+      text: 'Write a cool JS library',
+    },
+    {
+      id: 2,
+      text: 'Make it generic enough',
+    },
+    {
+      id: 3,
+      text: 'Write README',
+    },
+    {
+      id: 4,
+      text: 'Create some examples',
+    },
+    {
+      id: 5,
+      text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
+    },
+    {
+      id: 6,
+      text: '???',
+    },
+    {
+      id: 7,
+      text: 'PROFIT',
+    },
+  ])
+
+  const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+    setCards((prevCards: any[]) =>
+      update(prevCards, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, prevCards[dragIndex] as Item],
+        ],
+      }),
+    )
+  }, [])
+
+
+
   return (
     
 
@@ -256,6 +304,9 @@ export const Counter = () => {
                   <h1> Todo</h1>
                 </div>
                 <div className="app__todo--content">
+                  
+               
+
                    {tasks?.map((item, key) => {
                        if(item.type == 1){
                         return  (  <div key={key} className="app__todo--content-item">
@@ -274,6 +325,10 @@ export const Counter = () => {
                        </div>)
                        }
                     })}
+
+
+
+
                  
                 </div>
 
@@ -308,6 +363,8 @@ export const Counter = () => {
                                   size="small"
                                   color="warning"
                                   sx={{ width: "100%" }}
+                                  autoFocus
+                                  inputRef={(input) => input?.focus()}
                                 />
 
                                 {errors?.name && <span> {errors.name.message}</span>}
@@ -387,6 +444,8 @@ export const Counter = () => {
                                   size="small"
                                   color="warning"
                                   sx={{ width: "100%" }}
+                                  autoFocus
+                                  inputRef={(input) => input?.focus()}
                                 />
 
                                 {errors?.name && <span> {errors.name.message}</span>}
@@ -461,6 +520,8 @@ export const Counter = () => {
                                   size="small"
                                   color="warning"
                                   sx={{ width: "100%" }}
+                                  autoFocus
+                                  inputRef={(input) => input?.focus()}
                                 />
 
                                 {errors?.name && <span> {errors.name.message}</span>}
