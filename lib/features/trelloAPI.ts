@@ -35,7 +35,26 @@ export const trelloSlice = createAppSlice({
      deleteTodo: create.reducer((state, action : PayloadAction<TrelloSliceState>) => {
         return state.filter((item) => item.id != action.payload.id)
     }),
-    
+
+    setTodo: create.reducer((state, action : PayloadAction<TrelloSliceState[]>) => {
+      return action.payload;
+    }),
+
+    setTypeTodo  : create.reducer((state, action : PayloadAction<TrelloSliceState>) => {
+      return state.map(todo => {
+        if (todo.id === action.payload.id && action.payload.type != todo.type) {
+          return {
+            ...todo,
+            type : action.payload.type
+          }
+        } else {
+          return todo;
+        }
+      });
+     })
+
+
+
   }),
 
   selectors: {
@@ -44,7 +63,7 @@ export const trelloSlice = createAppSlice({
 });
 
 
-export const { addTodo, updateTodo , deleteTodo} =
+export const { addTodo, updateTodo , deleteTodo, setTodo, setTypeTodo} =
 trelloSlice.actions;
 
 

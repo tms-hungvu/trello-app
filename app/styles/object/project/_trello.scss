@@ -12,7 +12,7 @@
     position: relative;
     padding : 10px ;
     overflow-y: auto;
-    height: 400px;
+    max-height: 400px;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;
     display: flex;
@@ -126,4 +126,9 @@
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
+}
+
+.app__todo--content-item-hidden {
+//    visibility: hidden !important;
+//   height: 400px !important;
 }

@@ -15,8 +15,10 @@ import Switch from "@mui/material/Switch";
 import { useCallback, useState } from "react";
 
 import { useForm } from 'react-hook-form';
-import { TrelloSliceState , addTodo, updateTodo, deleteTodo} from '@/lib/features/trelloAPI';
+import { TrelloSliceState , addTodo, updateTodo, deleteTodo, setTodo, setTypeTodo} from '@/lib/features/trelloAPI';
 import update from 'immutability-helper'
+import { Card } from '../Card/Card';
+import { store } from '@/lib/store';
 
 
 const schemUpdate = Joi.object({
@@ -115,7 +117,7 @@ export const Counter = () => {
   });
 
   const onSubmitUpdate = (data : any) => {
-    alert('update')
+  
     const newDate = data.date;
     delete data.date;
 
@@ -131,9 +133,12 @@ export const Counter = () => {
  
   };
   const [open, setOpen] = useState(false);
-  const handleOpen = (id : number) => {
 
-    tasks.map((item) => {
+
+  const handleOpen = (id : number) => {
+ // alert(id)
+
+ store.getState().trello.map((item) => {
        if(item.id == id){
 
         let dateString = item.date;
@@ -168,48 +173,66 @@ export const Counter = () => {
   };
 
 
-  const [cards, setCards] = useState([
-    {
-      id: 1,
-      text: 'Write a cool JS library',
-    },
-    {
-      id: 2,
-      text: 'Make it generic enough',
-    },
-    {
-      id: 3,
-      text: 'Write README',
-    },
-    {
-      id: 4,
-      text: 'Create some examples',
-    },
-    {
-      id: 5,
-      text: 'Spam in Twitter and IRC to promote it (note that this element is taller than the others)',
-    },
-    {
-      id: 6,
-      text: '???',
-    },
-    {
-      id: 7,
-      text: 'PROFIT',
-    },
-  ])
+ 
 
-  const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
-    setCards((prevCards: any[]) =>
-      update(prevCards, {
-        $splice: [
-          [dragIndex, 1],
-          [hoverIndex, 0, prevCards[dragIndex] as Item],
-        ],
-      }),
-    )
+  const moveCard = useCallback((dragIndex: number, hoverIndex: number, dragColumnIndex  : number, hoverColumnIndex : number) => {
+    //console.log(dragIndex, hoverIndex)
+    
+    //console.log('>>old task', tasks)
+ 
+
+    
+
+    console.log(">>>>>>", dragColumnIndex, hoverColumnIndex)
+   // console.log('>>new task', newArr)
+   dispatch(setTypeTodo({id : dragColumnIndex, type : hoverColumnIndex} as TrelloSliceState))
+
+
+   const prevTask = store.getState().trello;
+
+
+    const newArr = update(prevTask, {
+      $splice: [
+        [dragIndex, 1],
+        [hoverIndex, 0, prevTask[dragIndex] as any],
+      ],
+    });
+   dispatch(setTodo(newArr));
+    //console.log(newArr);
+
+
+    // setCards((prevCards: any[]) =>
+    //   update(prevCards, {
+    //     $splice: [
+    //       [dragIndex, 1],
+    //       [hoverIndex, 0, prevCards[dragIndex] as any],
+    //     ],
+    //   }),
+    // )
+
+
+
+
   }, [])
+  
 
+  const renderCard = useCallback(
+    (card: { id: number; name: string; type : number }, index: number, columnIndex : number) => {
+      return (
+        <Card
+          key={card.id}
+          index={index}
+          id={card.id}
+          name={card.name}
+          columnIndex={columnIndex}
+          type={card.type}
+          moveCard={moveCard}
+          handleOpen={handleOpen}
+        />
+      )
+    },
+    [],
+  )
 
 
   return (
@@ -305,9 +328,11 @@ export const Counter = () => {
                 </div>
                 <div className="app__todo--content">
                   
-               
+                {tasks.map((card, i) => {
+                   return renderCard(card, i, 1)
+                })}
 
-                   {tasks?.map((item, key) => {
+                   {/* {tasks?.map((item, key) => {
                        if(item.type == 1){
                         return  (  <div key={key} className="app__todo--content-item">
                  
@@ -324,7 +349,7 @@ export const Counter = () => {
                          </div>
                        </div>)
                        }
-                    })}
+                    })} */}
 
 
 
@@ -392,7 +417,11 @@ export const Counter = () => {
                   <h1> Doing</h1>
                 </div>
                 <div className="app__todo--content">
-                {tasks?.map((item, key) => {
+
+                {tasks.map((card, i) => {
+                     return renderCard(card, i, 2)
+                })}
+                {/* {tasks?.map((item, key) => {
                        if(item.type == 2){
                         return  (  <div key={key} className="app__todo--content-item">
                  
@@ -409,7 +438,8 @@ export const Counter = () => {
                          </div>
                        </div>)
                        }
-                    })}
+                    })} */}
+                     
                 </div>
 
               
@@ -470,7 +500,10 @@ export const Counter = () => {
                   <h1> Done</h1>
                 </div>
                 <div className="app__todo--content">
-                {tasks?.map((item, key) => {
+                {tasks.map((card, i) => {
+                     return renderCard(card, i, 3)
+                })}
+                {/* {tasks?.map((item, key) => {
                        if(item.type == 3){
                         return  (  <div key={key} className="app__todo--content-item">
                  
@@ -487,7 +520,7 @@ export const Counter = () => {
                          </div>
                        </div>)
                        }
-                    })}
+                    })} */}
                 </div>
 
                 <div className="app__todo--content-form">
