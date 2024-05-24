@@ -33,7 +33,11 @@ $xl-screen: 1200px;
 }
 
 .container-fluid {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(https://media.istockphoto.com/id/1305410177/video/4k-defocused-background.jpg?s=640x640&k=20&c=6C0_kmr75YOn_YEZQcU-gq_VRnkUaK1vpoGLGshMDKo=);
     width : 100%;
+    height: 100vh;
     display : flex;
     align-items: center;
     justify-content: center;

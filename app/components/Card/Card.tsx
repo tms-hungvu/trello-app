@@ -1,11 +1,13 @@
 import { Tooltip } from '@mui/material'
 import type { Identifier, XYCoord } from 'dnd-core'
 import type { FC } from 'react'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import EditNoteIcon from "@mui/icons-material/EditNote";
-
-
+import { TrelloSliceState , addTodo, updateTodo, deleteTodo, setTodo, setTypeTodo} from '@/lib/features/trelloAPI';
+import { useAppDispatch } from '@/lib/hooks'
+import { store } from '@/lib/store'
+import DeleteIcon from '@mui/icons-material/Delete';
 const  ItemTypes =  {
     CARD: 'card',
 }
@@ -25,6 +27,7 @@ export interface CardProps {
   type :number;
   moveCard: (dragIndex: number, hoverIndex: number, dragColumnIndex  : number, hoverColumnIndex : number) => void
   handleOpen : any
+  handleDelete : any
 }
 
 interface DragItem {
@@ -33,9 +36,12 @@ interface DragItem {
   type: string
 }
 
-export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCard, handleOpen }) => {
+export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCard, handleOpen, handleDelete }) => {
+  
+
   const ref = useRef<HTMLDivElement>(null)
-  const [{ handlerId }, drop] = useDrop<
+  const refTemp = useRef<any>(null)
+  const [{ handlerId }, drop ] = useDrop<
     DragItem,
     void,
     { handlerId: Identifier | null }
@@ -48,13 +54,16 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
     },
     hover(item: DragItem, monitor) {
 
+  
      
-      //console.log('trigger trigger ...')
 
       if (!ref.current) {
+        
         return
       }
 
+
+     
 
      
      
@@ -96,10 +105,11 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
 
  
       moveCard(dragIndex, hoverIndex, dragColumnIndex, hoverColumnIndex)
-
+  
       item.index = hoverIndex
      
     },
+    
   })
 
   const [{ isDragging }, drag] = useDrag({
@@ -110,13 +120,32 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
+    end: () => {
+     
+      const divsWithoutDraggable = document.querySelectorAll('.app__todo--content-item:not([draggable])');
+      divsWithoutDraggable.forEach((div) => {
+     
+        div.setAttribute('draggable', 'true');
+        refTemp.current = div;
+      });
+      
+    },
+   
   })
 
   const opacity = isDragging ? 0 : 1
 
-  drag(drop(ref))
+  
 
 
+  if(refTemp.current && !ref.current){
+    drag(drop(refTemp))
+   
+  }else {
+    drag(drop( ref))
+  }
+ 
+ 
  return (
     <>
       {type == columnIndex && (
@@ -129,9 +158,14 @@ export const Card: FC<CardProps> = ({ id, name, index, columnIndex,type,  moveCa
           <div>
             <span>{name}</span>
           </div>
-          <div  onClick={() => handleOpen(id)} className="app__todo--content-item-icon">
-            <Tooltip title="Edit">
+          <div  className="app__todo--content-item-icon">
+            <Tooltip  onClick={() => handleOpen(id)} title="Edit">
               <EditNoteIcon />
+            </Tooltip>
+            <Tooltip onClick={() => handleDelete(id)} title="Delete" >
+              <DeleteIcon  sx={{color : 'red'}} />
+
+              
             </Tooltip>
           </div>
         </div>
